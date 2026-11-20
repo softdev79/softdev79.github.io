@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vishal Gupta · AI Engineer</title>
+<meta name="description" content="Vishal Gupta, AI Engineer: agentic AI systems on AWS (Bedrock, Lambda, Step Functions, ECS) with evals, built on 8 years of data engineering.">
+<meta property="og:title" content="Vishal Gupta · AI Engineer">
+<meta property="og:description" content="Six agentic AI projects deployed on AWS, each with evals and live evidence.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232456d6'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3EVG%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f7f8fa; --surface: #ffffff; --surface-2: #f0f3f8; --text: #141a24; --muted: #586274;
+    --line: #e1e6ee; --accent: #2456d6; --accent-soft: #e8eefc; --good: #177245; --shadow: 0 1px 2px rgba(20,26,36,.06), 0 8px 24px rgba(20,26,36,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117; --surface: #151b24; --surface-2: #1b2330; --text: #e7ebf2; --muted: #9aa6b8;
+      --line: #263041; --accent: #7aa2ff; --accent-soft: #1c2a4a; --good: #5fd39a; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117; --surface: #151b24; --surface-2: #1b2330; --text: #e7ebf2; --muted: #9aa6b8;
+    --line: #263041; --accent: #7aa2ff; --accent-soft: #1c2a4a; --good: #5fd39a; --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; gap: 18px; height: 56px; }
+  nav .brand { font-weight: 700; color: var(--text); margin-right: auto; }
+  nav a.link { color: var(--muted); font-size: 14px; }
+  nav a.link:hover { color: var(--text); text-decoration: none; }
+  #theme { border: 1px solid var(--line); background: var(--surface); color: var(--text); border-radius: 8px;
+           width: 34px; height: 34px; cursor: pointer; font-size: 15px; }
+  @media (max-width: 720px) { nav a.link { display: none; } }
+
+  header.hero { padding: 72px 0 48px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin: 10px 0 14px; letter-spacing: -.02em; }
+  .lead { font-size: 19px; color: var(--muted); max-width: 760px; margin: 0 0 24px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 14px; margin-bottom: 26px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 15px;
+         border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #fff); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --on-accent: #0d1117; } }
+  :root[data-theme="dark"] { --on-accent: #0d1117; }
+  .btn:hover { text-decoration: none; filter: brightness(1.05); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 40px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .stat b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 13px; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  section { padding: 44px 0; }
+  h2 { font-size: 26px; margin: 0 0 6px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 26px; }
+
+  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 820px) { .projects { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+          display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .thumb { aspect-ratio: 16 / 8; background: var(--surface-2); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .thumb.diagram { display: flex; align-items: center; justify-content: center; padding: 16px; }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; }
+  .flow span { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px; white-space: nowrap; }
+  .flow i { color: var(--muted); font-style: normal; }
+  .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 13px; }
+  .card h3 { margin: 0; font-size: 19px; line-height: 1.3; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  .card ul { margin: 2px 0 0; padding-left: 18px; font-size: 14.5px; }
+  .card li { margin: 3px 0; }
+  .card li b { color: var(--good); font-weight: 650; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+  .chip { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; font-weight: 600; }
+  .card .repo { font-size: 14px; font-weight: 600; }
+
+  .timeline { position: relative; margin-left: 8px; border-left: 2px solid var(--line); }
+  .job { position: relative; padding: 0 0 26px 24px; }
+  .job::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+                 background: var(--surface); border: 2px solid var(--accent); }
+  .job h3 { margin: 0; font-size: 17px; }
+  .job .when { color: var(--muted); font-size: 14px; }
+  .job ul { margin: 6px 0 0; padding-left: 18px; color: var(--text); font-size: 15px; }
+  .job li { margin: 3px 0; }
+
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .panel h3 { margin: 0 0 10px; font-size: 16px; }
+  .panel ul { margin: 0; padding-left: 18px; font-size: 15px; }
+  .panel li { margin: 5px 0; }
+  .panel .note { color: var(--muted); font-size: 13px; }
+  .skillgroup { margin-bottom: 12px; }
+  .skillgroup b { display: block; font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Vishal Gupta</a>
+    <a class="link" href="#projects">Projects</a>
+    <a class="link" href="#experience">Experience</a>
+    <a class="link" href="#skills">Skills</a>
+    <a class="link" href="#contact">Contact</a>
+    <button id="theme" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">AI Engineer III · HCLTech</div>
+    <h1>I build agentic AI systems that run in production on AWS.</h1>
+    <p class="lead">8 years of data engineering (GCP, Spark, Databricks, BigQuery) now applied to multi-agent systems:
+      LangGraph and Bedrock agents with real tools, guardrails written in code, evals that gate releases, and
+      infrastructure as code that costs about $0 when idle.</p>
+    <div class="facts"><span>📍 Gurugram, India</span><span>🗓 8 years of experience</span><span>☁️ AWS · GCP certified</span></div>
+    <div class="btns">
+      <a class="btn primary" href="#projects">See the projects</a>
+      <a class="btn" href="https://github.com/softdev79" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/vishal-gupta-dataengineer/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:vishalkgupta28@gmail.com">Email me</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>6</b><span>agentic AI projects deployed on AWS</span></div>
+      <div class="stat"><b>100%</b><span>route accuracy on 20 labelled insurance claims</span></div>
+      <div class="stat"><b>&lt;$0.01</b><span>per equity research memo</span></div>
+      <div class="stat"><b>600+</b><span>Airflow DAGs generated by my framework at IBM</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="sub">Each one is deployed on AWS, measured with evals, and documented with live evidence in its repo.</p>
+    <div class="projects">
+
+      <article class="card">
+        <div class="thumb"><img src="assets/claimsense.webp" alt="ClaimSense claimant portal showing an auto-approved claim and decision letter" loading="lazy"></div>
+        <div class="body">
+          <div class="meta"><span>Sep 2026 – Oct 2026</span><span>AWS capstone</span></div>
+          <h3>ClaimSense: agentic insurance claims processor</h3>
+          <p>A LangGraph agent that processes motor-insurance claims end to end: reads the claim PDFs, checks the policy,
+            decides coverage by citing policy clauses, calculates the payout, scores fraud risk, auto-approves small clean
+            claims and routes the rest to an adjuster or the fraud unit.</p>
+          <ul>
+            <li><b>100%</b> routing accuracy and <b>100%</b> fraud precision and recall on 20 labelled claims</li>
+            <li><b>100%</b> payable-amount accuracy; about ₹0.27 and 16 s per claim</li>
+            <li>Human-in-the-loop pause for adjusters; model chosen by evals, not by name</li>
+          </ul>
+          <div class="chips"><span class="chip">LangGraph</span><span class="chip">Amazon Bedrock</span><span class="chip">ECS Fargate</span><span class="chip">Terraform</span><span class="chip">FastAPI</span></div>
+          <a class="repo" href="https://github.com/softdev79/claimsense-agentic-claims-aws" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/comprehension.webp" alt="Comprehension Gate comment listing code-specific questions on a pull request" loading="lazy"></div>
+        <div class="body">
+          <div class="meta"><span>Aug 2026 – Sep 2026</span><span>GitHub App</span></div>
+          <h3>Comprehension Gate: merge gate for AI-written code</h3>
+          <p>Stops "comprehension debt". When a pull request opens, an agent reads the diff and asks the author
+            code-specific questions, grades the answers against the change, and keeps the merge blocked until the author
+            passes and signs.</p>
+          <ul>
+            <li>Claude Code plugin records which lines the AI wrote; risk tiers set how hard the questions are</li>
+            <li>Model grades, but a <b>deterministic policy</b> decides pass or fail</li>
+            <li>Sigstore-signed attestation; runs as a GitHub App on AWS Lambda (free tier)</li>
+          </ul>
+          <div class="chips"><span class="chip">Python</span><span class="chip">Amazon Bedrock</span><span class="chip">AWS Lambda</span><span class="chip">GitHub Actions</span><span class="chip">Sigstore</span></div>
+          <a class="repo" href="https://github.com/softdev79/comprehension-gate" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/finance.webp" alt="Finance Deep Search task board with research waves and the generated memo" loading="lazy"></div>
+        <div class="body">
+          <div class="meta"><span>Jul 2026 – Aug 2026</span><span>Step Functions</span></div>
+          <h3>Finance Deep Search: equity research agent</h3>
+          <p>Answers questions like "Compare NVIDIA with AMD and Intel" with a structured memo. A planner splits the work,
+            Step Functions runs the research in parallel waves, a code-only validator checks the findings, and the agent
+            re-plans when data is missing.</p>
+          <ul>
+            <li>Eval release gate (SHIP / CONDITIONAL / BLOCK): <b>100%</b> factual accuracy against SEC data on 6 cases</li>
+            <li>Fault injection blocks every bad release; the evals caught 4 real bugs before launch</li>
+            <li>Full 3-company memo in 73 s for <b>under $0.01</b></li>
+          </ul>
+          <div class="chips"><span class="chip">AWS Step Functions</span><span class="chip">Lambda</span><span class="chip">Bedrock gpt-oss</span><span class="chip">SEC EDGAR</span><span class="chip">DynamoDB</span></div>
+          <a class="repo" href="https://github.com/softdev79/finance-deep-search-aws" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb diagram" aria-label="AI Tutor architecture">
+          <div class="flow">
+            <span>Question</span><i>→</i><span>Agent (LangGraph)</span><i>→</i>
+            <span>BGE embeddings + S3 Vectors</span><i>+</i><span>BM25</span><i>→</i><span>RRF fusion</span><i>→</i>
+            <span>Streamed answer + citations</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="meta"><span>2026</span><span>Agentic RAG</span></div>
+          <h3>AI Tutor: agentic RAG with live streaming</h3>
+          <p>A tutor that answers questions about Hugging Face PEFT, TRL and the OpenAI Agents SDK from their official
+            docs, with citations. The agent decides when to search and when to open a page, and every step streams to
+            the browser.</p>
+          <ul>
+            <li>Hybrid search lifted hit@1 from <b>0.58 to 0.73</b> (MRR 0.73 → 0.82) on a 33-question benchmark</li>
+            <li>Lambda response streaming: first byte in 0.85 s; conversation memory in DynamoDB</li>
+            <li>Read-only KB "shell" tool re-implemented in pure Python, so no model output is ever executed</li>
+          </ul>
+          <div class="chips"><span class="chip">Amazon S3 Vectors</span><span class="chip">Lambda streaming</span><span class="chip">ONNX Runtime</span><span class="chip">Bedrock</span><span class="chip">Docker</span></div>
+          <a class="repo" href="https://github.com/softdev79/ai-tutor-serverless-aws" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/inventory.webp" alt="Inventory Planning Agent answering whether to reorder SKU002" loading="lazy"></div>
+        <div class="body">
+          <div class="meta"><span>Mar 2026 – Apr 2026</span><span>Serverless</span></div>
+          <h3>Inventory Planning Agent: serverless AI agent</h3>
+          <p>Ask "Should I reorder SKU002?" and a tool-calling agent looks up the SKU in DynamoDB, runs a reorder-point
+            calculator and answers in plain English. Rebuilt from an always-on container stack into a serverless one.</p>
+          <ul>
+            <li>Idle cost cut from about $40–60 a month to <b>$0</b></li>
+            <li>No stored LLM key: Lambda signs a short-term Bedrock token with its IAM role</li>
+            <li>Chat answers in about 2.3 s; one-command deploy and teardown</li>
+          </ul>
+          <div class="chips"><span class="chip">AWS Lambda</span><span class="chip">DynamoDB</span><span class="chip">Amazon Bedrock</span><span class="chip">AWS SAM</span><span class="chip">FastAPI</span></div>
+          <a class="repo" href="https://github.com/softdev79/inventory-agent-serverless-aws" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/tripbuddy.webp" alt="Trip Buddy answering a group trip budget question with tool trajectory chips" loading="lazy"></div>
+        <div class="body">
+          <div class="meta"><span>Jan 2026</span><span>Multi-agent</span></div>
+          <h3>Trip Buddy: multi-agent trip planner</h3>
+          <p>Plans group trips ("4 friends, ₹12,000 each, Goa for 3 nights?") with three cooperating services: a RAG +
+            ReAct agent, an MCP server for prices and exact cost maths, and a separate A2A guide agent.</p>
+          <ul>
+            <li><b>6/6</b> golden evals passed against the live URL (p50 3.6 s), graded on answer and tool trajectory</li>
+            <li>The model never does maths: costs come from bounded MCP tools</li>
+            <li>CloudFormation + GitHub Actions OIDC deploys; private service discovery with Cloud Map</li>
+          </ul>
+          <div class="chips"><span class="chip">MCP</span><span class="chip">A2A</span><span class="chip">ECS Fargate</span><span class="chip">CloudFormation</span><span class="chip">GitHub Actions</span></div>
+          <a class="repo" href="https://github.com/softdev79/trip-buddy-aws" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <p class="sub">From large-scale data pipelines to agentic AI.</p>
+    <div class="timeline">
+      <div class="job">
+        <h3>AI Engineer III · HCLTech</h3>
+        <div class="when">Oct 2026 – Present</div>
+        <ul>
+          <li>Built a 6-agent equity research system with Strands Agents and GPT-OSS-120B: an orchestrator coordinates
+            financial analysis, news, risk and valuation agents, with three agents running in parallel to cut latency.</li>
+          <li>Wrote the financial tools on Yahoo Finance data: a DCF model with sensitivity analysis, peer-multiple
+            valuation and ratio analysis, with a thread-safe cache shared across agents.</li>
+          <li>Added auditability and guardrails: reports pass between agents unchanged, every risk must cite evidence,
+            and the final BUY/HOLD/SELL rating is checked automatically.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Senior Data Engineer · IBM</h3>
+        <div class="when">Jun 2024 – Oct 2026</div>
+        <ul>
+          <li>Designed a Python and Jinja framework that generates Airflow DAGs from BigQuery metadata, scaling to
+            600+ DAGs (recognised internally).</li>
+          <li>Built an observability framework for pipeline monitoring; tuned Spark pipelines on Databricks.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Senior Associate Data Engineer L1 · Publicis Sapient</h3>
+        <div class="when">Jan 2024 – Jun 2024</div>
+        <ul>
+          <li>Identified BQML features for the personalization team; used Denodo caching on BigQuery to control cost and stabilise SLAs.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Engineer III Consultant · Verizon</h3>
+        <div class="when">Aug 2022 – Jan 2024</div>
+        <ul>
+          <li>Orchestrated pipelines with Cloud Composer and Databricks; ran the Teradata migration on Dataproc;
+            designed Delta Lake data lakes with ACID guarantees.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Data Engineer · Infosys</h3>
+        <div class="when">Jun 2018 – Aug 2022</div>
+        <ul>
+          <li>Wrote optimised PySpark (Spark SQL, DataFrames); used BigQuery as the warehouse with Dataflow and Dataproc for integration.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills, certifications and education</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="grid3">
+      <div class="panel">
+        <h3>Skills</h3>
+        <div class="skillgroup"><b>Agentic AI</b><div class="chips"><span class="chip">Multi-agent systems</span><span class="chip">LangGraph</span><span class="chip">LangChain</span><span class="chip">MCP</span><span class="chip">A2A</span><span class="chip">RAG</span><span class="chip">Evals</span><span class="chip">Fine-tuning</span></div></div>
+        <div class="skillgroup"><b>AWS</b><div class="chips"><span class="chip">Bedrock</span><span class="chip">Lambda</span><span class="chip">Step Functions</span><span class="chip">ECS Fargate</span><span class="chip">DynamoDB</span><span class="chip">S3 Vectors</span><span class="chip">Glue</span><span class="chip">EMR</span></div></div>
+        <div class="skillgroup"><b>Data</b><div class="chips"><span class="chip">Spark</span><span class="chip">Databricks</span><span class="chip">BigQuery</span><span class="chip">Airflow</span><span class="chip">Dataproc</span><span class="chip">Teradata</span><span class="chip">scikit-learn</span></div></div>
+      </div>
+      <div class="panel">
+        <h3>Certifications</h3>
+        <ul>
+          <li>AWS Certified Machine Learning – Specialty</li>
+          <li>AWS Certified Data Engineer – Associate</li>
+          <li>Google Cloud Professional Data Engineer <span class="note">(valid to May 2027)</span></li>
+          <li>Google Cloud Professional Cloud Architect <span class="note">(valid to Nov 2026)</span></li>
+          <li>Claude Certified Architect – Professional <span class="note">(valid to Sep 2026)</span></li>
+          <li>Data Engineer Associate</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Education</h3>
+        <ul>
+          <li><b>B.C.A., Computer Applications</b>, 2018<br><span class="note">Dr Virendra Swarup Institute of Computer Studies, Kanpur</span></li>
+        </ul>
+        <h3 style="margin-top:16px">Earlier projects</h3>
+        <ul>
+          <li>Bank card fraud analytics with Spark</li>
+          <li>Ola driver attrition prediction</li>
+          <li>Netflix churn business case study</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div><b>Vishal Gupta</b> · AI Engineer · Gurugram, India</div>
+    <div class="btns">
+      <a class="btn primary" href="mailto:vishalkgupta28@gmail.com">vishalkgupta28@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/vishal-gupta-dataengineer/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/softdev79" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.getElementById("theme");
+    try { var saved = localStorage.getItem("theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+    btn.addEventListener("click", function () {
+      var dark = root.getAttribute("data-theme") === "dark" ||
+        (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      var next = dark ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
